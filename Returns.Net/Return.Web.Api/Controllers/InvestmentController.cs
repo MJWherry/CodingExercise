@@ -27,7 +27,7 @@ public class InvestmentController(IInvestmentService InvestmentService): Control
         }
     }
     
-    [HttpPost(ApiRoutes.User.Base + "/{userId:guid}/Investments/Query")]
+    [HttpPost(ApiRoutes.Investment.Base + "/Query")]
     public async Task<ActionResult<IReadOnlyList<InvestmentRes>>> QueryInvestments(
         [FromBody]InvestmentQuery query, 
         CancellationToken cts = default)

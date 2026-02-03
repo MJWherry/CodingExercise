@@ -6,6 +6,10 @@ public static class ApiRoutes
     {
         public const string Base = "user";
     }
+    public static class Investment
+    {
+        public const string Base = "investment";
+    }
 }
 
 /*
