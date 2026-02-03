@@ -2,8 +2,10 @@
 
     <PropertyGroup>
         <TargetFramework>net10.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
+        <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+        <Deterministic>true</Deterministic>
         <IsPackable>false</IsPackable>
     </PropertyGroup>
 
@@ -19,6 +21,10 @@
 
     <ItemGroup>
         <Using Include="Xunit"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Returns.Models\Returns.Models.csproj" />
     </ItemGroup>
 
 </Project>
