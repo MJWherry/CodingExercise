@@ -24,10 +24,10 @@ public static class TestData
         DateTime PurchaseDateTime);
     
     public static IReadOnlyList<InvestmentData> DatabaseData = [
-        new(Guid.NewGuid(), User1Id, Stock1Name, 5, 10, new DateTime(2023, 1, 1)),
-        new(Guid.NewGuid(), User1Id, Stock2Name, 10, 20, new DateTime(2023, 6, 1)),
-        new(Guid.NewGuid(), User2Id, Stock2Name, 15, 30, new DateTime(2024, 1, 1)),
-        new(Guid.NewGuid(), User2Id, Stock3Name, 20, 40, new DateTime(2022, 1, 1)),
+        new(Guid.NewGuid(), User1Id, Stock1Name, 5, 10, new(2023, 1, 1)),
+        new(Guid.NewGuid(), User1Id, Stock2Name, 10, 20, new(2023, 6, 1)),
+        new(Guid.NewGuid(), User2Id, Stock2Name, 15, 30, new(2024, 1, 1)),
+        new(Guid.NewGuid(), User2Id, Stock3Name, 20, 40, new(2022, 1, 1)),
     ];
 }
 

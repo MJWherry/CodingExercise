@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,9 @@ namespace Return.Web.Api.Controllers;
 public class InvestmentController(IInvestmentService investmentService): ControllerBase 
 {
     [HttpGet(ApiRoutes.User.Base + "/{userId:guid}/Investments")]
-    public async Task<ActionResult<IReadOnlyList<InvestmentRes>>> GetUserInvestments(
+    [ProducesResponseType<IReadOnlyList<InvestmentRes>>((int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    public async Task<ActionResult<IReadOnlyList<InvestmentRes>?>> GetUserInvestments(
         Guid userId,
         CancellationToken cts = default)
     {
@@ -22,11 +25,13 @@ public class InvestmentController(IInvestmentService investmentService): Control
             return Ok(results);
         }
         catch (Exception ex) {
-            return Problem(ex.Message);
+            return BadRequest(ex.Message);
         }
     }
     
     [HttpPost(ApiRoutes.Investment.Query)]
+    [ProducesResponseType<IReadOnlyList<InvestmentRes>>((int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<IReadOnlyList<InvestmentRes>>> QueryInvestments(
         [FromBody]InvestmentQuery query, 
         CancellationToken cts = default)
@@ -36,7 +41,7 @@ public class InvestmentController(IInvestmentService investmentService): Control
             return Ok(results);
         }
         catch (Exception ex) {
-            return Problem(ex.Message);
+            return BadRequest(ex.Message);
         }
     }
 }
