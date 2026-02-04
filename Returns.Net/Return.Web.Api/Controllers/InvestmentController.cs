@@ -9,7 +9,7 @@ using Returns.Models;
 namespace Return.Web.Api.Controllers;
 
 [ApiController]
-public class InvestmentController(IInvestmentService InvestmentService): ControllerBase 
+public class InvestmentController(IInvestmentService investmentService): ControllerBase 
 {
     [HttpGet(ApiRoutes.User.Base + "/{userId:guid}/Investments")]
     public async Task<ActionResult<IReadOnlyList<InvestmentRes>>> GetUserInvestments(
@@ -17,9 +17,8 @@ public class InvestmentController(IInvestmentService InvestmentService): Control
         CancellationToken cts = default)
     {
         try {
-            var results = await InvestmentService.GetByUserId(userId, cts);
-            if (results is null)
-                return NotFound(userId);
+            //usually should check for existing user
+            var results = await investmentService.GetByUserId(userId, cts);
             return Ok(results);
         }
         catch (Exception ex) {
@@ -27,13 +26,13 @@ public class InvestmentController(IInvestmentService InvestmentService): Control
         }
     }
     
-    [HttpPost(ApiRoutes.Investment.Base + "/Query")]
+    [HttpPost(ApiRoutes.Investment.Query)]
     public async Task<ActionResult<IReadOnlyList<InvestmentRes>>> QueryInvestments(
         [FromBody]InvestmentQuery query, 
         CancellationToken cts = default)
     {
         try {
-            var results = await InvestmentService.Query(query, cts);
+            var results = await investmentService.Query(query, cts);
             return Ok(results);
         }
         catch (Exception ex) {

@@ -11,20 +11,20 @@ public class Investment
     public Guid UserId { get; set; }
     public string ShareName { get; set; }
     public decimal ShareCount { get; set; }
-    public decimal PurchaseCost { get; set; }
+    public decimal CostBasisPerShare { get; set; }
     public DateTime PurchaseDateTime { get; set; }
 
     public Investment(){ }
 
-    public Investment(Guid id, Guid userId, string shareName, decimal shareCount, decimal purchaseCost, DateTime purchaseDateTime)
+    public Investment(Guid id, Guid userId, string shareName, decimal shareCount, decimal costBasisPerShare, DateTime purchaseDateTime)
     {
         Id = id;
         UserId = userId;
         ShareName = shareName;
         ShareCount = shareCount;
-        PurchaseCost = purchaseCost;
+        CostBasisPerShare = costBasisPerShare;
         PurchaseDateTime = purchaseDateTime;
     }
     
-    public override string ToString() => $"{ShareName} ({ShareCount} shares at {PurchaseCost:C} purchased on {PurchaseDateTime:d})";
+    public override string ToString() => $"{ShareName} ({ShareCount} shares at {CostBasisPerShare:C} per share purchased on {PurchaseDateTime:d})";
 }

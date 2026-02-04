@@ -25,6 +25,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Returns.Models\Returns.Models.csproj" />
+      <ProjectReference Include="..\Return.Web.Api\Return.Web.Api.csproj" />
     </ItemGroup>
 
 </Project>

@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Return.Web.Api;
 using Return.Web.Api.Database;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,8 +16,9 @@ builder.Services
     .AddLogging(logging => 
         logging.ClearProviders().AddSimpleConsole());
 
+builder.Services.AddControllers();
+
 builder.Services
-    .AddReturnsDbContextFactory()
     .AddMapsterProfiles()
     .AddReturnsService();
 
@@ -25,7 +27,10 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment()) {
     app.MapOpenApi();
+    app.MapScalarApiReference();
 }
+
+app.MapControllers();
 
 app.UseHttpsRedirection();
 

@@ -1,5 +1,7 @@
 using System;
 using System.Diagnostics;
+using System.Text.Json.Serialization;
+using Returns.Models.Enum;
 
 namespace Returns.Models;
 
@@ -9,9 +11,19 @@ public sealed record InvestmentRes(
     Guid UserId,
     string Name,
     decimal ShareCount,
-    decimal PurchaseCostPerShare,
-    DateTime PurchaseDate)
+    decimal CostBasisPerShare,
+    DateTime PurchaseDate,
+    decimal CurrentPrice)
 {
-    public override string ToString() => $"{Name} ({ShareCount} shares at {PurchaseCostPerShare:C} purchased on {PurchaseDate:d})";
+    //usually i would ignore this data on serialization unless its needed since they are all computed
+    
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public TermEnum Term => DateTime.UtcNow.Subtract(PurchaseDate).TotalDays > 365 ? TermEnum.Long : TermEnum.Short;
+    
+    public decimal TotalGainOrLoss => CurrentValue - (ShareCount * CostBasisPerShare);
+
+    public decimal CurrentValue => ShareCount * CurrentPrice;
+    
+    public override string ToString() => $"{Name} ({ShareCount} shares at {CostBasisPerShare:C} per share purchased on {PurchaseDate:d})";
 }
 

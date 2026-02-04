@@ -11,7 +11,7 @@ public interface IInvestmentService
     /// <summary></summary>
     /// <param name="userId">UserId to get investments for</param>
     /// <returns>Returns null if no user found</returns>
-    Task<IReadOnlyList<InvestmentRes>?> GetByUserId(Guid userId, CancellationToken cts = default);
+    Task<IReadOnlyList<InvestmentRes>> GetByUserId(Guid userId, CancellationToken cts = default);
     
     /// <summary></summary>
     /// <param name="query"></param>

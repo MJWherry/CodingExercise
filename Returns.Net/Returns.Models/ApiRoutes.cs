@@ -9,6 +9,7 @@ public static class ApiRoutes
     public static class Investment
     {
         public const string Base = "investment";
+        public const string Query = Base + "/Query";
     }
 }
 
